@@ -1,0 +1,195 @@
+<section class="container py-4">
+  <div class="row">
+    <div class="col-md-12">
+      <ul id="tabs" class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            href=""
+            data-target="#home1"
+            data-toggle="tab"
+            class="nav-link small active"
+            >Detalles</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            href=""
+            data-target="#profile1"
+            data-toggle="tab"
+            class="nav-link small"
+            >Productos</a
+          >
+        </li>
+      </ul>
+      <br />
+      <div id="tabsContent" class="tab-content">
+        <div id="home1" class="tab-pane fade active show">
+          <div class="container">
+            <div class="col-md-12">
+              <div class="invoice">
+                <!-- begin invoice-company -->
+                <div class="invoice-company text-inverse f-w-600">
+                  <span class="pull-right hidden-print">
+                    <!-- <a
+                      href="javascript:;"
+                      class="btn btn-sm btn-white m-b-10 p-l-5"
+                      ><i class="fa fa-file t-plus-1 text-danger fa-fw fa-lg"></i>Exportar a PDF</a> -->
+                  </span>
+                  Orden No: {{element.id.toUpperCase()}} 
+                </div>
+                <!-- end invoice-company -->
+                <!-- begin invoice-header -->
+                <div class="invoice-header">
+                  <div class="invoice-from">
+                    <small>Datos de entrega:</small>
+                    <address class="m-t-5 m-b-5">
+                      <strong class="text-inverse">
+                        Recibe: {{userOrder.names}} {{userOrder.surnames}}</strong
+                      ><br />
+                      <strong>Calle:</strong> {{address.calle}}, Colonia {{ address.colonia }}, CP: {{ address.cp}}  <br />
+                      <strong>Estado: </strong> {{address.state}}  , Ciudad: {{address.town}} <br />
+                      <strong>Número de contacto: </strong> {{address.phone}} <br />
+                      <strong>No. Ext:</strong> {{address.noExterior}} <br />
+                      <strong>No. Int:</strong> {{address.noInterior}} <br />
+                      <strong>Detalles:</strong> {{address.moreInformation}} <br />
+                    </address>
+                  </div>
+
+                  <div class="invoice-date">
+                    <small>Fecha de solicitud</small>
+                    <div class="date text-inverse m-t-5">
+                       {{element.createdAt | date: 'dd/MM/yyyy'}} 
+                    </div>
+                    <div class="invoice-detail">
+                      Orden ID: #{{element.id}}<br />
+                      Enviado por: DHL Express<br />
+                      Estatus: En curso<br />
+                    </div>
+                  </div>
+                </div>
+                <!-- end invoice-header -->
+                <!-- begin invoice-content -->
+                <div class="invoice-content">
+                  <!-- begin table-responsive -->
+                  <div class="table-responsive">
+                    <table class="table table-invoice">
+                      <thead>
+                        <tr>
+                          <th>Descripción de costos</th>
+                          <th class="text-center" width="10%">Costo</th>
+                          <th class="text-right" width="20%">Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <span class="text-inverse">Compra total</span><br />
+                            <small
+                              >El costo total de los productos adquiridos
+                            </small>
+                          </td>
+                          <td class="text-center"> ${{ element.subtotal }}.00  </td>
+                          <td class="text-right"> ${{ element.subtotal }}.00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <span class="text-inverse">Descuento</span><br />
+                            <small>El total en descuentos acumulado. </small>
+                          </td>
+                          <td class="text-center"> - ${{element.discount}}..00</td>
+                          <td class="text-right">${{calculateDiscount()}}..00</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <span class="text-inverse">Envio </span><br />
+                            <small
+                              >El costo del envio seleccionado.</small
+                            >
+                          </td>
+                          <td class="text-center">+ ${{ cost() }}..00 </td>
+                          <td class="text-right">${{ element.amount }}.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- end table-responsive -->
+                  <!-- begin invoice-price -->
+                  <div class="invoice-price">
+                    <div class="invoice-price-left">
+                      <div class="invoice-price-row">
+                        <div class="sub-price">
+                          <small>SUBTOTAL</small>
+                          <span class="text-inverse">${{calculateDiscount()}}.00</span>
+                        </div>
+                        <div class="sub-price">
+                          <i class="fa fa-plus text-muted"></i>
+                        </div>
+                        <div class="sub-price">
+                          <small>ENVIO</small>
+                          <span class="text-inverse">${{cost()}}.00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="invoice-price-right">
+                      <small>TOTAL</small> <span class="f-w-600">$ {{ element.amount }}.00</span>
+                    </div>
+                  </div>
+                  <!-- end invoice-price -->
+                </div>
+                <!-- end invoice-content -->
+                <!-- begin invoice-note -->
+                <div class="invoice-note">
+                  * ¿Algún dato esta incorrecto? [9381283932]<br />
+                  * No aplica devoluciones, ni reembolsos <br />
+                  * ¿No has recibido aun tu producto? [9381233031]
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="profile1" class="tab-pane fade">
+          <div class="text-center">
+            <!-- <h2>Mis pedidos</h2> -->
+            <p class="lead">Productos relacionados al pedido</p>
+          </div>
+
+          <!-- Billing history card-->
+          <div class="card mb-4">
+            <div class="card-header">Billing History</div>
+            <div class="card-body p-0">
+              <!-- Billing history table-->
+              <div class="table-responsive table-billing-history">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th class="border-gray-200" scope="col">Nombre</th>
+                      <th class="border-gray-200" scope="col">Talla</th>
+                      <th class="border-gray-200" scope="col">Precio</th>
+                      <th class="border-gray-200" scope="col">Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of productsByOrder">
+                      <td>
+                        <a routerLink="/product/{{ item.productId }}">{{ item.name }}</a>
+                      </td>
+                      <td>{{ item.size }}</td>
+                      <td>${{ item.price }}</td>
+                      <td>
+                        <span class="badge bg-light text-dark">{{
+                            item.cantd
+                        }}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

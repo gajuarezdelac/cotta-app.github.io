@@ -1,0 +1,96 @@
+section {
+    height: 100vh;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+  }
+
+  .content-sap {
+    cursor: pointer;
+  }
+  
+  .container-flex {
+    display: flex;
+  }
+  
+  .img-login {
+    border: 0px transparent #ddd;  border-radius: 4px;  padding: 0px; width: 150px;  
+  }
+  
+  .banner-login {
+    height: 100vh;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    background-image:url(https://images.pexels.com/photos/3722813/pexels-photo-3722813.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 
+    background-size:cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    /* filter: blur(1.5px); */
+  }
+  
+  .form {
+    width: 40%;
+    padding: 30px 10px;
+    margin: 0 auto;
+  }
+  
+  .text-ent {
+    font-size: 14px;
+  }
+  
+  .logo-macropay {
+    padding: 10px 0px 5px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items:flex-end;
+  }
+  
+  .sap {
+    color: rgb(95, 77, 28);
+    font-weight: bold;
+  }
+  
+  .services-text {
+    color: rgb(6, 7, 77);
+    font-weight: bold;
+  }
+  
+  .card-login {
+       border: 0px;
+       width: 100%;
+  }
+  
+  /* Section Responsive */
+  
+  
+  /* < 850px */
+  @media (max-width: 950px) {
+  
+    .content-sap {
+      cursor: pointer;
+      display: none;
+    }
+   
+  }
+  
+  @media (max-width: 650px) {
+  
+    .macropay-2021 {
+      display: none;
+    }
+  
+    .banner-login {
+      display: none;
+    }
+  
+    .form {
+      width: 80%;
+    }
+  }
+  

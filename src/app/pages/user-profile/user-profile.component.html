@@ -1,0 +1,525 @@
+
+<section class="container py-4">
+  <div class="row">
+    <div class="col-md-12">
+      <ul id="tabs" class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            href=""
+            data-target="#home1"
+            data-toggle="tab"
+            class="nav-link small active"
+            >Mis datos</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            href=""
+            data-target="#profile1"
+            data-toggle="tab"
+            class="nav-link small"
+            >Mis pedidos</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            href=""
+            data-target="#messages1"
+            data-toggle="tab"
+            class="nav-link small"
+            >Seguridad</a
+          >
+        </li>
+      </ul>
+      <br />
+      
+      <div id="tabsContent" class="tab-content">
+        <div id="home1" class="tab-pane fade active show">
+          <div class="row" id="home1">
+            <div class="col-xl-4">
+              <!-- Profile picture card-->
+              <div class="card mb-4 mb-xl-0">
+                <div class="card-header"> Mi perfil </div>
+                <div class="card-body text-center">
+                  <!-- Profile picture image-->
+                
+                  <div class="osahan-user text-center">
+                    <div class="osahan-user-media">
+                       
+                        <div class="user-l">
+                            <div class="circle">
+                                <span class="initials">{{getInitials()}}</span>
+                              </div>
+                        </div>
+
+                        <div class="osahan-user-media-body">
+                            <h6 class="mb-2">{{user?.names}} {{user?.surnames}} </h6>
+                            <p class="mb-1">{{isNull(user?.numberPhone)}}</p>
+                            <p>{{user?.username}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                  <!-- Profile picture help block-->
+                  <!-- <div class="small font-italic text-muted mb-4">
+                    Formato JPG o PNG , No mayor a 5 MB.
+                  </div> -->
+                  <!-- Profile picture upload button-->
+                  <!-- <button class="btn btn-primary" type="button">
+                    Adjuntar imagen
+                  </button> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-8">
+              <!-- Account details card-->
+              <div class="card mb-4">
+                <div class="card-header">Detalle de mis cuentas </div>
+                <div class="card-body">
+                  <form 
+                  [formGroup]="editForm" 
+                  (ngSubmit)="onSubmit()"
+                  nz-form
+                  class="login-form"
+                  [nzLayout]="'vertical'"
+                  >
+                    <!-- Form Group (username)-->
+                    <div class="mb-3">
+                      <nz-form-item>
+                        <nz-form-label nzRequired> Correo electronico </nz-form-label>
+                        <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                          <input
+                           
+                            type="text"
+                            nz-input
+                            formControlName="username"
+                            [(ngModel)]="currentUsername && currentUsername!.username"
+                            placeholder="please enter user name"
+                          />
+                        </nz-form-control>
+                      </nz-form-item>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                      <!-- Form Group (first name)-->
+                      <div class="col-md-6">
+                        <nz-form-item>
+                          <nz-form-label nzRequired> Nombres (s) </nz-form-label>
+                          <nz-form-control  nzHasFeedback nzErrorTip="Campo requerido">
+                            <input
+                              type="text"
+                              nz-input
+                              formControlName="names"
+                              [(ngModel)]="currentUsername && currentUsername!.names"
+                              placeholder="please enter user name"
+                            />
+                          </nz-form-control>
+                        </nz-form-item>
+                      </div>
+                      <!-- Form Group (last name)-->
+                      <div class="col-md-6">
+                        <nz-form-item>
+                          <nz-form-label nzRequired> Apellido (s) </nz-form-label>
+                          <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                            <input
+                              type="text"
+                              nz-input
+                              formControlName="surnames"
+                              [(ngModel)]="currentUsername && currentUsername!.surnames"
+                              placeholder="please enter user name"
+                            />
+                          </nz-form-control>
+                        </nz-form-item>
+
+                      </div>
+                    </div>
+                    <!-- Form Row        -->
+
+                    <!-- Form Group (email address)-->
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                          <nz-form-item>
+                            <nz-form-label nzRequired> Número de telefono </nz-form-label>
+                            <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                              <input
+                                type="text"
+                                nz-input
+                                formControlName="numberPhone"
+                                [(ngModel)]="currentUsername && currentUsername!.numberPhone"
+                                placeholder="please enter user name"
+                              />
+                            </nz-form-control>
+                          </nz-form-item>               
+                        </div>
+                  
+
+                        <div class="col-md-6">
+                          <nz-form-item>
+                            <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                              <nz-form-label nzRequired> Estado </nz-form-label>
+                              <nz-select nz-input formControlName="location" 
+                              [(ngModel)]="currentUsername && currentUsername!.location">
+                              <nz-option *ngFor="let item of lstState" [nzLabel]="item.value" [nzValue]="item.clave"></nz-option>                            
+                              </nz-select>
+                            </nz-form-control>
+                          </nz-form-item>
+                        </div>       
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                      <!-- Form Group (phone number)-->
+                      <div class="col-md-6">
+                    
+                        <nz-form-item>
+                          <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                            <nz-form-label nzRequired> Genero </nz-form-label>
+                            <nz-select nz-input formControlName="gender" 
+                            [(ngModel)]="currentUsername && currentUsername!.gender">
+                              <nz-option nzValue="Hombre" nzLabel="Hombre"></nz-option>
+                              <nz-option nzValue="Mujer" nzLabel="Mujer"></nz-option>
+                              <nz-option nzValue="Otro" nzLabel="Prefiero no especificar"></nz-option>
+                            </nz-select>
+                          </nz-form-control>
+                        </nz-form-item>
+
+                      </div>
+
+
+                      <!-- Form Group (birthday)-->
+                      <div class="col-md-6">
+                        <label class="small mb-1" for="inputBirthday">Fecha de nacimiento</label>
+                         <br>
+                        
+                        <nz-date-picker formControlName="dateOfBirth"  [(ngModel)]="currentUsername && currentUsername!.dateOfBirth"></nz-date-picker>
+
+<!-- 
+                        <div
+                        class="form-group form-animate-text"
+                        >
+                        {{currentUsername && currentUsername!.dateOfBirth | date: 'dd/MM/yyyy'}}
+
+                      </div> -->
+                      </div>
+                    </div>
+                    <!-- Save changes button-->
+                    <button type="submit" name="button" class="btn btn-primary">
+                      Actualizar perfil
+                    </button>
+
+
+                  </form>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div id="profile1" class="tab-pane fade">
+          <div>
+
+            
+  <div class="text-center">
+    <h2>Mis pedidos</h2>
+    <p class="lead">Selecciona o crea una dirección de entrega</p>
+  </div>
+
+
+            <!-- <div class="row">
+              <div class="col-lg-4 mb-4">
+
+                <div class="card h-100 border-start-lg border-start-primary">
+                  <div class="card-body">
+                    <div class="small text-muted">Current monthly bill</div>
+                    <div class="h3">$20.00</div>
+                    <a class="text-arrow-icon small" href="#!">
+                      Switch to yearly billing
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-arrow-right"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-start-lg border-start-secondary">
+                  <div class="card-body">
+                    <div class="small text-muted">Next payment due</div>
+                    <div class="h3">July 15</div>
+                    <a class="text-arrow-icon small text-secondary" href="#!">
+                      View payment history
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-arrow-right"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-start-lg border-start-success">
+                  <div class="card-body">
+                    <div class="small text-muted">Current plan</div>
+                    <div class="h3 d-flex align-items-center">Freelancer</div>
+                    <a class="text-arrow-icon small text-success" href="#!">
+                      Upgrade plan
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-arrow-right"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Billing history card-->
+            <div class="card mb-4">
+              <div class="card-header">Billing History</div>
+              <div class="card-body p-0">
+                <!-- Billing history table-->
+                <div class="table-responsive table-billing-history">
+                  <table class="table mb-0">
+                    <thead>
+                      <tr>
+                        <th class="border-gray-200" scope="col">
+                          Transaction ID
+                        </th>
+                        <th class="border-gray-200" scope="col">Amount</th>
+                        <th class="border-gray-200" scope="col">Date</th>
+                        <th class="border-gray-200" scope="col">Status</th>
+                        <th class="border-gray-200" scope="col">Visualizar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of lstOrders">
+                        <td>#{{item.id}}</td>
+                        <td>${{item.amount}}</td>
+                        <td>{{item.createdAt | date: 'dd/MM/yyyy'}}</td>
+                        <td>
+                          <span class="badge bg-light text-dark">Pending</span>
+                        </td>
+                        
+                        <td>
+                          <nz-space>
+                            <button nz-button nzShape="circle" nzType="text"  routerLink="/order/{{item.id}}">
+                              <i nz-icon nzTheme="twotone" nzType="eye"></i>
+                            </button>
+                            <!-- <button nz-button nzShape="circle" nzType="text">
+                              <i nz-icon nzTheme="twotone" [nzTwotoneColor]="'#006699'" nzType="file"></i>
+                            </button> -->
+                          </nz-space>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="messages1" class="tab-pane fade">
+         
+          <nz-spin [nzSpinning]="isLoadingGeneral">
+
+          
+            <div class="row">
+              <div class="col-lg-8">
+                <!-- Change password card-->
+                <div class="card mb-4">
+                  <div class="card-header">Change Password</div>
+                  <div class="card-body">
+                    <form 
+                    [formGroup]="resetForm" 
+                    (ngSubmit)="onResetPassword()"
+                    nz-form
+                    class="login-form"
+                    [nzLayout]="'vertical'"
+                    >
+               
+                      <!-- Form Group (current password)-->
+                      <div class="mb-3">
+                        <nz-form-item>
+                          <nz-form-label nzRequired> Contraseña actual </nz-form-label>
+                          <nz-form-control nzErrorTip="Campo requerido">
+                            <input
+                              type="text"
+                              nz-input
+                              formControlName="currentPassword"
+                              placeholder="please enter user name"
+                            />
+                          </nz-form-control>
+                        </nz-form-item>
+                      </div>
+                      <!-- Form Group (new password)-->
+                      <div class="mb-3">
+                        <nz-form-item>
+                          <nz-form-label nzRequired> Nueva contraseña </nz-form-label>
+                          <nz-form-control nzErrorTip="Campo requerido">
+                            <input
+                              type="text"
+                              nz-input
+                              formControlName="password"
+                              placeholder="please enter user name"
+                            />
+                          </nz-form-control>
+                        </nz-form-item>
+                      </div>
+                      <!-- Form Group (confirm password)-->
+                      <div class="mb-3">
+                        <nz-form-item>
+                          <nz-form-label nzRequired> Confirmar contraseña </nz-form-label>
+                          <nz-form-control nzErrorTip="Campo requerido">
+                            <input
+                              type="text"
+                              nz-input
+                              formControlName="newpassword"
+                              placeholder="please enter user name"
+                            />
+                          </nz-form-control>
+                        </nz-form-item>
+                      </div>
+                      <button class="btn btn-primary" type="submit" >Actualizar contraseña</button>
+                    </form>
+                  </div>
+                </div>
+                <!-- Security preferences card
+                <div class="card mb-4">
+                  <div class="card-header">Security Preferences</div>
+                  <div class="card-body">
+                    <h5 class="mb-1">Account Privacy</h5>
+                    <p class="small text-muted">
+                      By setting your account to private, your profile information
+                      and posts will not be visible to users outside of your user
+                      groups.
+                    </p>
+                    <form>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          id="radioPrivacy1"
+                          type="radio"
+                          name="radioPrivacy"
+                          checked=""
+                        />
+                        <label class="form-check-label" for="radioPrivacy1"
+                          >Public (posts are available to all users)</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          id="radioPrivacy2"
+                          type="radio"
+                          name="radioPrivacy"
+                        />
+                        <label class="form-check-label" for="radioPrivacy2"
+                          >Private (posts are available to only users in your
+                          groups)</label
+                        >
+                      </div>
+                    </form>
+                    <hr class="my-4" />
+                    <h5 class="mb-1">Data Sharing</h5>
+                    <p class="small text-muted">
+                      Sharing usage data can help us to improve our products and
+                      better serve our users as they navigation through our
+                      application. When you agree to share usage data with us,
+                      crash reports and usage analytics will be automatically sent
+                      to our development team for investigation.
+                    </p>
+                    <form>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          id="radioUsage1"
+                          type="radio"
+                          name="radioUsage"
+                          checked=""
+                        />
+                        <label class="form-check-label" for="radioUsage1"
+                          >Yes, share data and crash reports with app
+                          developers</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          id="radioUsage2"
+                          type="radio"
+                          name="radioUsage"
+                        />
+                        <label class="form-check-label" for="radioUsage2"
+                          >No, limit my data sharing with app developers</label
+                        >
+                      </div>
+                    </form>
+                  </div>
+                </div> -->
+              </div>
+              <div class="col-lg-4">
+                <!-- Delete account card-->
+                <div class="card mb-4">
+                  <div class="card-header">Desactivar mi cuenta</div>
+                  <div class="card-body">
+                    <p>
+                      Deleting your account is a permanent action and cannot be
+                      undone. If you are sure you want to delete your account,
+                      select the button below.
+                    </p>
+                    <button class="btn btn-danger-soft text-danger" type="button" (click)="showDeleteConfirm()">
+                      Desactivar cuenta
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+   
+          </nz-spin>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+

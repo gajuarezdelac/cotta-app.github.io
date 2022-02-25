@@ -1,0 +1,100 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    
+    <div class="sidebar-logo">
+      <a routerLink="/home">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>  Cotta </h1>
+      </a>
+    </div>
+
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+
+      <li nz-menu-item  nzTitle="Comprar" nzMatchRouter nzIcon="form">
+        <i nz-icon nzType="bar-chart"> </i> 
+        <span  routerLink="/dashboard/statistics" > Dashboard </span>
+      </li>
+
+      <li nz-submenu nzOpen nzTitle="Administración" nzIcon="apartment">
+        <ul>
+
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/dashboard/products"  >Inventario</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a  routerLink="/dashboard/users" >Usuarios</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a  routerLink="/dashboard/orders" > Pedidos </a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a  routerLink="/dashboard/reviews" > Comentarios </a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a  routerLink="/dashboard/inbox" > Mensajes </a>
+          </li>
+
+        </ul>
+      </li>
+
+      <!-- <li nz-submenu nzOpen nzTitle="Finanzas" nzIcon="shopping-cart">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a  routerLink="/dashboard/finance">  Contabilidad y gastos </a>
+          </li>
+        </ul>
+      </li> -->
+      
+      <li nz-menu-item nzMatchRouter>
+        <i nz-icon nzType="solution"> </i> 
+        <span> FAQ </span>
+      </li>
+
+
+      <li nz-menu-item  nzTitle="Comprar" nzMatchRouter nzIcon="form">
+        <i nz-icon nzType="verified"> </i> 
+        <span> Aviso de privacidad </span>
+      </li>
+
+
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+       
+          <i class="trigger"
+             nz-icon
+             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></i>
+        </span> 
+        
+       <span class="avatar">
+        <nz-space>
+          <a *nzSpaceItem class="btn btn-primary"  routerLink="/my-profile" > <i class="fas fa-user-shield"></i> Mi perfil </a>
+          <a *nzSpaceItem class="btn btn-danger avatar-user"  (click)="onLogOut()" > <i class="fas fa-sign-out-alt"></i> Salir </a> 
+          <!-- <nz-avatar *nzSpaceItem class="avatar-user" nzText="GA"></nz-avatar>  -->
+        </nz-space>
+
+       </span> 
+       
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

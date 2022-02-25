@@ -1,0 +1,165 @@
+<nz-spin [nzSpinning]="isLoadingGeneral">
+  
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a data-abc="true">
+          <i class="fa fa-home"></i>
+      </a>
+  </li>
+    <li class="breadcrumb-item"> Administración </li>
+    <li class="breadcrumb-item active" aria-current="page"> Mensajes </li>
+  </ol>
+</nav>
+  
+      
+  <form
+  nz-form
+  [nzLayout]="'vertical'"
+  [formGroup]="validateForm" 
+  class="login-form" 
+  (ngSubmit)="submitForm()"
+  >  
+    <div nz-row [nzGutter]="24">
+      <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">
+        <nz-form-item class="input-content" > 
+          <nz-form-label [nzSpan]="6" nzFor="email"> Asunto </nz-form-label>
+          <nz-form-control nzErrorTip="Campo obligatorio">
+            <nz-input-group nzPrefixIcon="container">
+              <input type="text" nz-input formControlName="subject" placeholder="Busqueda por asunto..." />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div></div>
+
+      <div nz-col class="gutter-row"  [nzSpan]="6"><div class="inner-box">            
+        <nz-form-item class="input-content" > 
+          <nz-form-label [nzSpan]="6" nzFor="content"> Mensaje </nz-form-label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="inbox">
+              <input type="text" nz-input formControlName="content" placeholder="Busqueda por mensaje..." />
+            </nz-input-group>
+
+          </nz-form-control>
+        </nz-form-item>
+      </div></div>
+
+      
+      <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">            
+        <nz-form-item class="input-content" > 
+          <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="mail">
+              <input type="text" nz-input formControlName="email" placeholder="Busqueda por email...." />
+            </nz-input-group>
+
+          </nz-form-control>
+        </nz-form-item>
+      </div></div>
+
+      
+      <div nz-col class="gutter-row" [nzSpan]="6"><div class="inner-box">            
+        <nz-form-item class="input-content" > 
+          <nz-form-label [nzSpan]="6" nzFor="email"></nz-form-label>
+          <nz-form-control>
+            <button class="btn btn-primary"> <i class="fas fa-search"></i>  Realizar busqueda </button>
+          </nz-form-control>
+        </nz-form-item>
+      </div></div>
+        </div>
+
+      </form>     
+
+      
+          <div nz-row [nzGutter]="8">
+
+            <div nz-col class="gutter-row" align="left"  [nzSpan]="12"><div class="inner-box">            
+            <button class="btn btn-success" (click)="generateExcel()" ><i class="fas fa-file-excel"></i>  Generar </button>
+            </div></div>
+
+            <div nz-col class="gutter-row" align="right"  [nzSpan]="12"><div class="inner-box">          
+              </div></div>
+          </div>
+
+
+        <br>
+  
+  
+    
+  <nz-table  
+  #fixedTable
+  #headerTable
+  [nzData]="data"
+  [nzScroll]="{ y: '240px' }"
+  nzShowPagination
+  [nzPageSizeOptions]="[10, 20, 30]"
+  nzShowSizeChanger
+  [nzPageSize]="pageSize"
+  [nzPageIndex]="current"
+  [nzFrontPagination]="false"
+  [nzTotal]="total"
+  [nzLoading]="isLoadingTable"
+  (nzPageSizeChange)="changePageSize($event)"
+  (nzPageIndexChange)="changeCurrentPage($event)"
+  >
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Asunto</th>
+      <th>Enviado</th>
+      <th>Email</th>
+      <th nzRight nzAlign="center" nzWidth="100px">Acciones</th>
+    </tr>
+  </thead>
+    
+  <tbody>
+    <tr *ngFor="let data of headerTable.data">
+      <td>{{ data.id }}</td>
+      <td>{{ data.subject }}</td>
+      <td>{{ data.createdAt | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ data.email }}</td>
+      <td nzRight nzAlign="center">
+        <nz-space>
+          <button nz-button nzShape="circle" nzType="text">
+            <i nz-icon nzTheme="twotone" (click)="openDrawer(data)" [nzTwotoneColor]="'#08a000'" nzType="eye"></i>
+          </button>
+          <button nz-button nzShape="circle" nzType="text">
+            <i nz-icon nzTheme="twotone" (click)="showDeleteConfirm(data)" [nzTwotoneColor]="'#a31600'" nzType="delete"></i>
+          </button>
+        </nz-space>
+      </td>
+
+    </tr>
+  </tbody>
+  </nz-table>
+
+
+  <!-- View drawer -->
+
+  <nz-drawer
+  [nzWidth]="340"
+  [nzClosable]="false"
+  [nzVisible]="visibleDrawer"
+  nzPlacement="right"
+  nzTitle="Mensaje"
+  (nzOnClose)="closeDrawer()"
+>
+  <ng-container *nzDrawerContent>
+   <nz-spin [nzSpinning]="isLoadingDrawer">
+  
+    <nz-descriptions [nzColumn]="2" nzTitle="Asunto: {{viewInbox?.subject}}">
+      <nz-descriptions-item nzTitle="Enviado por " [nzSpan]="2">{{viewInbox?.email}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Fecha " [nzSpan]="2"> {{viewInbox?.createdAt | date: 'dd/MM/yyyy'}} </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ID " [nzSpan]="2"> {{viewInbox?.id}} </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Mensaje" [nzSpan]="2">
+        {{ viewInbox?.content }}
+      </nz-descriptions-item>
+    </nz-descriptions>
+
+
+   </nz-spin>
+  </ng-container>
+</nz-drawer>
+
+</nz-spin>
+  

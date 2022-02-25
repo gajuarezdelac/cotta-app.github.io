@@ -1,0 +1,13 @@
+.layout {
+    width: 100%;
+    background-color: aqua;
+    margin: 0 auto;
+}
+
+a.btn {
+    color: #ffff;
+}
+
+a.btn:hover {
+    color: rgb(224, 221, 221);
+}

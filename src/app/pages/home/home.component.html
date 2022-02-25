@@ -1,0 +1,422 @@
+<nz-spin [nzSpinning]="isLoadingView">
+
+
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100 eleme-c" (click)="navigate('keywords')" src="https://img.ltwebstatic.com/images3_ach/2022/01/29/1643439764d88520d30400ac00ba2533132ad5128c.webp" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100 eleme-c" (click)="navigate('keywords')" src="https://img.ltwebstatic.com/images3_ach/2022/01/17/164240225200cc12fd85b4901da84b361808170ace.jpg" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100 eleme-c" (click)="navigate('keywords')" src="https://img.ltwebstatic.com/images3_ach/2022/01/07/1641547530e04e59508764a813341299fc6f3f2673.jpg" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  
+  
+
+  <section class="category">
+  
+    <h1 class="heading"> shop by <span>category</span> </h1>
+  
+    <div class="box-container">
+  
+        <div class="box eleme-c"  (click)="navigate('Hombres')">
+            <img src="https://img.ltwebstatic.com/images3_ach/2022/01/29/1643436391247acf3865689d396de4f7882ba73e4d.gif" alt="">
+            <div class="content">
+                <span>upto 50% off</span>
+                <h3>for womans</h3>
+                <a href="#" class="btn">shop now</a>
+            </div>
+        </div>
+  
+        <div class="box eleme-c" (click)="navigate('Hombres')">
+            <img src="https://img.ltwebstatic.com/images3_ach/2022/01/07/1641547530e04e59508764a813341299fc6f3f2673.jpg" alt="">
+            <div class="content">
+                <span>upto 50% off</span>
+                <h3>for mans</h3>
+                <a href="#" class="btn">shop now</a>
+            </div>
+        </div>
+  
+      <div class="box eleme-c" (click)="navigate('Hombres')">
+          <img src="https://img.ltwebstatic.com/images3_ach/2022/01/25/1643096702724c518a8d80ef873d40fa8760d30a5c.png" alt="">
+          <div class="content">
+              <span>upto 50% off</span>
+              <h3>for mans</h3>
+              <a href="#" class="btn">shop now</a>
+          </div>
+      </div>  
+    </div>
+  </section>
+  
+<!--   
+  <section class="pt-2 pb-2">
+  
+    <h1 class="heading"> shop by <span>category</span> </h1>
+  
+  
+    <div class="products">
+      <div class="row">
+          <div class="col-6">
+              <h3 class="mb-3">Carousel cards title </h3>
+          </div>
+          <div class="col-6 text-right">
+              <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                  <i class="fa fa-arrow-left"></i>
+              </a>
+              <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                  <i class="fa fa-arrow-right"></i>
+              </a>
+          </div>
+          <div class="col-12">
+              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+  
+                  <div class="carousel-inner">
+                      <div class="carousel-item active">
+                          <div class="row">
+  
+                              <div class="col-md-4 mb-3">
+                                <div class="card">
+                                  <img class="card-img" src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/acdde152-f911-4620-8bc8-1c13f60ee7de/calzado-de-f%C3%BAtbol-para-terreno-firme-phantom-gt2-elite-fg-6H4wRT.png" alt="Vans">
+                                  <div class="card-img-overlay d-flex justify-content-end">
+                                    <a href="#" class="card-link text-danger like">
+                                      <i class="fas fa-heart"></i>
+                                    </a>
+                                  </div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
+                                    <p class="card-text">
+                                      The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
+                                
+                                    <div class="buy d-flex justify-content-between align-items-center">
+                                      <div class="price text-success"><h5 class="mt-4">$125</h5></div>
+                                          <a routerLink="product/ASSS" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Ver mas detalle</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                <div class="card">
+                                  <img class="card-img" src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/bc0b7650-3f96-4ed4-9f28-53c9ae7399b4/calzado-de-f%C3%BAtbol-para-terreno-firme-mercurial-superfly-8-elite-cr7-fg-Mh1nPj.png" alt="Vans">
+                                  <div class="card-img-overlay d-flex justify-content-end">
+                                    <a href="#" class="card-link text-danger like">
+                                      <i class="fas fa-heart"></i>
+                                    </a>
+                                  </div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
+                                    <p class="card-text">
+                                      The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
+                              
+                                    <div class="buy d-flex justify-content-between align-items-center">
+                                      <div class="price text-success"><h5 class="mt-4">$125</h5></div>
+                                          <button (click)="viewDetails('prodcuto###')" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Ver mas detalle</button>
+                                          
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                <div class="card">
+                                  <img class="card-img" src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/0870572e-ca17-4d6f-8b1a-2e86a638ca49/calzado-de-f%C3%BAtbol-para-terreno-firme-phantom-gt2-dynamic-fit-elite-fg-m1cFn0.png" alt="Vans">
+                                  <div class="card-img-overlay d-flex justify-content-end">
+                                    <a href="#" class="card-link text-danger like">
+                                      <i class="fas fa-heart"></i>
+                                    </a>
+                                  </div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
+                                    <p class="card-text">
+                                      The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
+                               
+                                    <div class="buy d-flex justify-content-between align-items-center">
+                                      <div class="price text-success"><h5 class="mt-4">$125</h5></div>
+                                          <a routerLink="product/ASSS" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Ver mas detalle</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              
+  
+                          </div>
+                      </div>
+                
+                      <div class="carousel-item">
+                          <div class="row">
+  
+                              <div class="col-md-4 mb-3">
+                                <div class="card">
+                                  <img class="card-img" src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/98e71bc0-c9f4-4f3e-ac5f-c73bdd9a836f/calzado-de-running-de-carretera-air-zoom-pegasus-38-FGw5Ll.png" alt="Vans">
+                                  <div class="card-img-overlay d-flex justify-content-end">
+                                    <a href="#" class="card-link text-danger like">
+                                      <i class="fas fa-heart"></i>
+                                    </a>
+                                  </div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
+                                    <p class="card-text">
+                                      The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
+                               
+                                    <div class="buy d-flex justify-content-between align-items-center">
+                                      <div class="price text-success"><h5 class="mt-4">$125</h5></div>
+                                      <a routerLink="product/ASSS" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Ver mas detalle</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                <div class="card">
+                                  <img class="card-img" src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/7d651f55-de96-4916-8062-82a72c7a1a6a/calzado-de-running-de-carretera-air-zoom-vomero-16-wvdS5m.png" alt="Vans">
+                                  <div class="card-img-overlay d-flex justify-content-end">
+                                    <a href="#" class="card-link text-danger like">
+                                      <i class="fas fa-heart"></i>
+                                    </a>
+                                  </div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
+                                    <p class="card-text">
+                                      The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
+                                
+                                    <div class="buy d-flex justify-content-between align-items-center">
+                                      <div class="price text-success"><h5 class="mt-4">$125</h5></div>
+                                      <a routerLink="product/ASSS" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Ver mas detalle</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                   <div class="card">
+                                  <img class="card-img" src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ee523846-b2f6-44ca-9d05-72d423591ac8/calzado-de-f%C3%BAtbol-para-terreno-firme-mercurial-superfly-8-elite-fg-fPFGNk.png" alt="Vans">
+                                  <div class="card-img-overlay d-flex justify-content-end">
+                                    <a href="#" class="card-link text-danger like">
+                                      <i class="fas fa-heart"></i>
+                                    </a>
+                                  </div>
+                                  <div class="card-body">
+                                    <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
+                                    <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
+                                    <p class="card-text">
+                                      The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
+                                
+                                    <div class="buy d-flex justify-content-between align-items-center">
+                                      <div class="price text-success"><h5 class="mt-4">$125</h5></div>
+                                       <a routerLink="product/ASSS" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Ver mas detalle</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                         
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </section>
+   -->
+
+   <div class="container pb-5 mb-sm-1">
+
+    
+    <h1 class="heading"> shop by <span>category</span> </h1>
+  
+    
+    <!-- Categories grid-->
+    <div class="row">
+        <!-- Category-->
+        <div class="col-md-4 col-sm-6"  *ngFor="let item of products" >
+            <div class="card border-0 mb-grid-gutter">
+                <a class="card-img-tiles" href="shop-style1-ls.html">
+                    <div class="main-img"><img src="{{item && item.images[0].routeFile}}" alt="Clothing"></div>
+                    <div class="thumblist"><img src="{{item && item.images[1].routeFile}}" alt="Clothing"><img src="{{item && item.images[2].routeFile}}" alt="Clothing"></div>
+                </a>
+
+                <div class="card-body border mt-n1 py-4 text-center">
+                    <h2 class="h5 mb-1">{{item.name}}</h2>
+                    <span class="d-block mb-3 font-size-xs text-muted"> Compralo desde: <span class="font-weight-semibold">${{item.price}}</span></span><a class="btn btn-pill btn-outline-primary btn-sm" routerLink="/product/{{item.id}}"> Comprar </a>
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
+  
+
+
+<div class="container-ct">
+  <h3 class="h3">  Categorias   </h3>
+  <div class="row">
+      <div class="col-md-3 col-sm-6">
+          <div class="product-grid9">
+              <div class="product-image9">
+                  <a href="#">
+                    <img class="pic-1" src="https://i.blogs.es/1354de/prendas-de-ropa-deportiva-3-/450_1000.jpg">
+                    <img class="pic-2" src="https://assetspwa.liverpool.com.mx/assets/digital/landing/deportes/img/ropa-deportiva-sep21.jpg">
+      
+                  </a>
+                  <a href="#" class="fa fa-search product-full-view"></a>
+              </div>
+              <div class="product-content">
+                  <ul class="rating">
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                  </ul>
+                  <h3 class="title"><a href="#"> Ropa Deportiva </a></h3>
+                  <div class="price"> $100.00 - $1500.00</div>
+                  <a class="add-to-cart" href=""> VER PRODUCTOS </a>
+              </div>
+          </div>
+      </div> 
+
+
+      <div class="col-md-3 col-sm-6">
+          <div class="product-grid9">
+              <div class="product-image9">
+                  <a href="#">
+                    <img class="pic-1" src="https://i.blogs.es/b963a2/prendas-de-ropa-deportiva/450_1000.jpg">
+                    <img class="pic-2" src="https://i.pinimg.com/474x/4d/4e/43/4d4e4349bf4ca9fd4c1e27b052249589.jpg">
+      
+                  </a>
+                  <a href="#" class="fa fa-search product-full-view"></a>
+              </div>
+              <div class="product-content">
+                  <ul class="rating">
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star disable"></li>
+                      <li class="fa fa-star disable"></li>
+                  </ul>
+                  <h3 class="title"><a href="#"> Ropa casual</a></h3>
+                  <div class="price"> $10.20 </div>
+                  <a class="add-to-cart" href=""> VER PRODUCTOS </a>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+          <div class="product-grid9">
+              <div class="product-image9">
+                  <a href="#">
+                    
+                    <img class="pic-1" height="100px" src="https://us.123rf.com/450wm/vadymvdrobot/vadymvdrobot1906/vadymvdrobot190604387/125967116-longitud-total-de-una-atractiva-joven-africana-vistiendo-ropa-casual-que-se-encuentran-aisladas-sobr.jpg?ver=6">
+                    <img class="pic-2" height="100px" src="https://media.revistagq.com/photos/5ca5f06ff552a1b91032e094/3:4/w_837,h_1116,c_limit/como_vestir_casual_hombre_9100.jpg">
+                  </a>
+                  <a href="#" class="fa fa-search product-full-view"></a>
+              </div>
+              <div class="product-content">
+                  <ul class="rating">
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                  </ul>
+                  <h3 class="title"><a href="#">Women's Top</a></h3>
+                  <div class="price"> $12.60 - $40.53</div>
+                  <a class="add-to-cart" href="">VER PRODUCTOS</a>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+          <div class="product-grid9">
+              <div class="product-image9">
+                  <a href="#">
+                    <img class="pic-1" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/zapatillas-look-negro-1503659149.jpg?crop=1xw:1xh;center,top&resize=480:*">
+                    <img class="pic-2" src="https://i.pinimg.com/originals/30/d3/49/30d3497aff6fbf795ad8b53fd7defa6f.jpg">
+                  </a>
+                  <a href="#" class="fa fa-search product-full-view"></a>
+              </div>
+              <div class="product-content">
+                  <ul class="rating">
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                      <li class="fa fa-star"></li>
+                  </ul>
+                  <h3 class="title"><a href="#">Women's Top</a></h3>
+                  <div class="price"> $12.60 - $40.53</div>
+                  <a class="add-to-cart" href="">VER PRODUCTOS</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  
+
+  <section class="service">
+  
+    <div class="box-container">
+  
+        <div class="box">
+            <i class="fas fa-shipping-fast"></i>
+            <h3>Entrega rapida</h3>
+            <p>Gracias a nuestros acuerdos con diferentes instituciones los envios son realmente rapidos.</p>
+        </div>
+  
+        <div class="box">
+            <i class="fas fa-undo"></i>
+            <h3>10 días de garantia</h3>
+            <p>Todos nuestros productos tienen 10 días para ser devueltos **</p>
+        </div>
+  
+        <div class="box">
+            <i class="fas fa-headset"></i>
+            <h3>24 x 7 Soporte</h3>
+            <p>Cualquier duda sobre tus pagos o uso de la plataforma contactanos.</p>
+        </div>
+    </div>
+  
+  </section>
+  
+  <!-- 
+  <section class="social-section-videos">
+  
+    <div class="social-video">
+      <iframe  src="https://www.youtube-nocookie.com/embed/saei5MwyL08" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="video"></iframe>  
+    </div>
+  
+    
+    <div class="social-video">
+      <iframe  src="https://www.youtube-nocookie.com/embed/saei5MwyL08" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="video"></iframe>  
+    </div>
+  
+  </section> -->
+<!--   
+  <div class="subscribe">
+      <h2 class="subscribe__title">Let's keep in touch</h2>
+      <p class="subscribe__copy">Subscribe to keep up with fresh news and exciting updates. We promise not to spam you!</p>
+      <div class="form">
+          <input type="email" class="form__email" placeholder="Enter your email address" />
+          <button class="form__button">Send</button>
+      </div>
+      <div class="notice">
+          <input type="checkbox">
+          <span class="notice__copy"  >I agree to my email address being stored and uses to recieve monthly newsletter.</span>
+      </div>
+  </div> -->
+
+  
+
+</nz-spin>

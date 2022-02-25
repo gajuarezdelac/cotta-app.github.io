@@ -1,0 +1,373 @@
+
+<nz-spin [nzSpinning]="isLoadingSave">
+
+<div class="container-check-shopping">
+
+
+  
+
+  <div class="text-center">
+    <h2>Información de entrega</h2>
+    <p class="lead">Selecciona o crea una dirección de entrega</p>
+  </div>
+<!-- 
+  <div class="row">
+      <div class="col-lg-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Dirección 1</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <div class="widget-49">
+                      <div class="widget-49-title-wrapper">
+                          <div class="widget-49-date-primary">
+                              <span class="widget-49-date-day">09</span>
+                              <span class="widget-49-date-month">apr</span>
+                          </div>
+                          <div class="widget-49-meeting-info">
+                              <span class="widget-49-pro-title">PRO-08235 DeskOpe. Website</span>
+                              <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                          </div>
+                      </div>
+                      <ol class="widget-49-meeting-points">
+                          <li class="widget-49-meeting-item"><span>Expand module is removed</span></li>
+                          <li class="widget-49-meeting-item"><span>Data migration is in scope</span></li>
+                          <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li>
+                      </ol>
+                      <div class="widget-49-meeting-action">
+                          <a class="btn btn-sm btn-flash-border-primary">Seleccionar</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Dirección 2</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <div class="widget-49">
+                      <div class="widget-49-title-wrapper">
+                          <div class="widget-49-date-warning">
+                              <span class="widget-49-date-day">13</span>
+                              <span class="widget-49-date-month">apr</span>
+                          </div>
+                          <div class="widget-49-meeting-info">
+                              <span class="widget-49-pro-title">PRO-08235 Lexa Corp.</span>
+                              <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                          </div>
+                      </div>
+                      <ol class="widget-49-meeting-points">
+                          <li class="widget-49-meeting-item"><span>Scheming module is removed</span></li>
+                          <li class="widget-49-meeting-item"><span>App design contract confirmed</span></li>
+                          <li class="widget-49-meeting-item"><span>Client request to send invoice</span></li>
+                      </ol>
+                      <div class="widget-49-meeting-action">
+                          <a class="btn btn-sm btn-flash-border-warning">Seleccionar</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="card card-margin">
+              <div class="card-header no-border">
+                  <h5 class="card-title">Dirección 3</h5>
+              </div>
+              <div class="card-body pt-0">
+                  <div class="widget-49">
+                      <div class="widget-49-title-wrapper">
+                          <div class="widget-49-date-success">
+                              <span class="widget-49-date-day">22</span>
+                              <span class="widget-49-date-month">apr</span>
+                          </div>
+                          <div class="widget-49-meeting-info">
+                              <span class="widget-49-pro-title">PRO-027865 Opera module</span>
+                              <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                          </div>
+                      </div>
+                      <ol class="widget-49-meeting-points">
+                          <li class="widget-49-meeting-item"><span>Scope is revised and updated</span></li>
+                          <li class="widget-49-meeting-item"><span>Time-line has been changed</span></li>
+                          <li class="widget-49-meeting-item"><span>Received approval to start wire-frame</span></li>
+                      </ol>
+                      <div class="widget-49-meeting-action">
+                          <a class="btn btn-sm btn-flash-border-success">Seleccionar</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div> -->
+  </div>
+
+
+<div class="container-check-shopping">
+
+  
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="badge badge-primary badge-pill"> Cantidad: {{products.length}} </span>
+          <button type="button" class="btn btn-danger" routerLink="/my-cart"> <i class="fa fa-angle-double-left"></i> Retroceder </button>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Subtotal:</h6>
+              <small class="text-muted">Suma de los articulos.</small>
+            </div>
+            <span class="text-muted"> ${{grandTotalDiscount}}.00  </span>
+          </li>
+          
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Descuento:</h6>
+              <small class="text-muted">Descuento aplicado a la compra.</small>
+            </div>
+            <span class="text-success"> - ${{calculateDiscount(grandTotalDiscount,grandTotal)}}.00   </span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Envio</h6>
+              <small class="text-muted">Costo del envio.</small>
+            </div>
+            <span class="text-danger"> ${{cost()}}.00  </span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (MXN)</span>
+            <strong> ${{calculateTotal(grandTotal)}}.00  </strong>
+          </li>
+          
+        </ul>
+
+        <!-- <a class="btn btn-primary btn-block" routerLink="/payment">
+        Proceder al pago </a> -->
+
+          
+          <button class="btn btn-warning btn-lg btn-block" type="submit" form="ngForm">  
+            <i class="fa fa-credit-card"></i>  Proceder a pagar </button>
+      
+      </div>
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Datos de pago y entrega</h4>
+        <form
+        #e="ngForm"
+        id="ngForm"
+        nz-form
+        [formGroup]="createAddress"
+        (ngSubmit)="createSubmit()"
+        class="login-form"
+        [nzLayout]="'vertical'"
+        >
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="names"> Nombre (s)  </label>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <input
+                  [(ngModel)]="selectAddress && selectAddress!.names"
+                  type="text" nz-input formControlName="names" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Apellido (s)</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <input
+
+                    nz-input
+                    [(ngModel)]="selectAddress && selectAddress!.surnames"
+                    formControlName="surnames"
+                    placeholder="Escribe el titulo"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-4 mb-1">
+              <label for="calle">Calle:</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <input
+                  
+                  [(ngModel)]="selectAddress && selectAddress!.calle"
+                  type="text" nz-input formControlName="calle" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div class="col-md-4 mb-1">
+              <label for="colonia">Colonia:</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <input
+                  [(ngModel)]="selectAddress && selectAddress!.colonia"
+                  type="text" nz-input formControlName="colonia" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div class="col-md-4 mb-1">
+              <label for="cp">Código postal:</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <input
+                  [(ngModel)]="selectAddress && selectAddress!.cp"
+                  type="text" nz-input formControlName="cp" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+          </div>
+  
+          <div class="mb-3">
+            <label for="email">Correo <span class="text-muted">(Este correo estara siendo notificado del estatus de tu pedido)</span></label>
+            <nz-form-item>
+              <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                <input
+                 [(ngModel)]="selectAddress && selectAddress!.email"
+                 type="email" nz-input formControlName="email" placeholder="Busqueda por mensaje..."
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="names"> Estado </label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <nz-select nzShowSearch nzAllowClear formControlName="state" nzPlaceHolder="Selecciona un estado" 
+                  [(ngModel)]="selectAddress && selectAddress!.state"
+                  (ngModelChange)="onChangeState($event)">
+                    <nz-option class="capitalize" *ngFor="let item of lstState" [nzLabel]="item.value" [nzValue]="item.clave"></nz-option> 
+                  </nz-select>    
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Ciudad o localidad</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <nz-select nzShowSearch nzAllowClear formControlName="city"  nzPlaceHolder="Selecciona una persona" 
+                  [(ngModel)]="selectAddress && selectAddress!.city">
+                    <nz-option *ngFor="let item of lstCities" [nzLabel]="item.value" [nzValue]="item.value"></nz-option> 
+                  </nz-select>    
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+  
+    
+  
+          <!-- <div class="mb-3">
+            <label for="names">Last name</label>
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <input
+                  type="text" nz-input formControlName="names" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+          </div> -->
+  
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="phone">Número de contacto</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <input
+                  
+                  [(ngModel)]="selectAddress && selectAddress!.phone"
+                  type="number" nz-input formControlName="phone" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="noExternal">No. exterior</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <input
+                  
+                  [(ngModel)]="selectAddress && selectAddress!.noExternal"
+                  type="number" nz-input formControlName="noExternal" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="noInternal">No. interior</label>
+              <nz-form-item>
+                <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                  <input
+                  
+                  [(ngModel)]="selectAddress && selectAddress!.noInternal"
+                  type="number" nz-input formControlName="noInternal" placeholder="Busqueda por mensaje..."
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div class="mb-12">
+            <label for="moreInformation">Describe como llegar a tu hogar</label>
+            <nz-form-item>
+              <nz-form-control nzHasFeedback nzErrorTip="Campo requerido">
+                <textarea
+                  nz-input
+                  formControlName="moreInformation"
+                  [(ngModel)]="selectAddress && selectAddress!.moreInformation"
+                  placeholder="Escribe puntos de referencia para llegar al lugar de envio."
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <hr class="mb-4">
+
+          <label class="custom-control custom-radio">
+						<input value="1" type="radio" name="typeSend" 
+            
+            [(ngModel)]="selectAddress && selectAddress!.typeSend"
+            formControlName="typeSend" checked="" class="custom-control-input">
+						<div class="custom-control-label"> $179 M.N  (Envio basico de 3 a 5 días) </div>
+					  </label>
+
+					<label class="custom-control custom-radio">
+					  <input value="2" type="radio" name="typeSend" 
+            [(ngModel)]="selectAddress && selectAddress!.typeSend"
+            formControlName="typeSend" class="custom-control-input">
+					  <div class="custom-control-label"> $279 M.N  (Envio basico de 1 a 3 días)  </div>
+					</label>
+	
+          <hr class="mb-4">
+          
+          <!-- <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="same-address">
+            <label class="custom-control-label" for="same-address"> Guardar la dirección </label>
+          </div> -->
+          
+          <!-- <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="save-info">
+            <label class="custom-control-label" for="save-info"> Guardar la dirección para usarlo posteriormente </label>
+          </div>
+          <hr class="mb-4"> -->
+        </form>        
+      </div>
+    </div>
+  </div>
+
+
+
+</nz-spin>

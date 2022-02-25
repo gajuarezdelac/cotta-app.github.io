@@ -1,0 +1,30 @@
+
+  /* Avatar */
+
+  .user-l{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin: 10px auto;
+  }
+  
+.circle {
+    background-color: rgb(238, 98, 34);
+    border-radius: 50%;
+    height: 5rem;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    width: 5rem;
+  }
+  
+  .initials {
+    color: #ffff;
+    font-size: calc(4rem / 2); /* 50% of parent */
+    line-height: 1;
+    position: relative;
+    top: calc(var(--avatar-size) / 4); /* 25% of parent */
+  }
+  
+  

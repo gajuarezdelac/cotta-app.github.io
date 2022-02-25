@@ -1,0 +1,192 @@
+<nz-spin [nzSpinning]="isLoadingGeneral">
+  
+
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a data-abc="true">
+            <i class="fa fa-home"></i>
+        </a>
+    </li>
+      <li class="breadcrumb-item"> Administración </li>
+      <li class="breadcrumb-item active" aria-current="page"> Comentarios </li>
+    </ol>
+  </nav>
+    
+    <form
+    nz-form
+    [nzLayout]="'vertical'"
+    [formGroup]="validateForm" 
+    class="login-form" 
+    (ngSubmit)="submitForm()"
+    >  
+      <div nz-row [nzGutter]="24">
+        <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box">
+          <nz-form-item class="input-content" > 
+            <label>Cod. Producto </label>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="audit">
+                <input type="text" nz-input formControlName="codeProd" placeholder="Escribe el código de producto..." />
+              </nz-input-group>
+  
+            </nz-form-control>
+          </nz-form-item>
+        </div></div>
+  
+        <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box">            
+          <nz-form-item class="input-content" > 
+            <label> Mensaje </label>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="container">
+                <input type="text" nz-input formControlName="message" placeholder="Escribe las palabras claves del mensaje..." />
+              </nz-input-group>
+  
+            </nz-form-control>
+          </nz-form-item>
+        </div></div>
+  
+        
+        <div nz-col class="gutter-row" [nzSpan]="8"><div class="inner-box">            
+          <nz-form-item class="input-content" > 
+            <label> Email </label>
+            <nz-form-control >
+              <nz-input-group nzPrefixIcon="user">
+                <input type="text" nz-input formControlName="email" placeholder="Escribe el email del usuario..." />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div></div>
+          </div>
+        
+            <div nz-row [nzGutter]="8">
+  
+              <div nz-col class="gutter-row" align="left"  [nzSpan]="12"><div class="inner-box">            
+              <a class="btn btn-success" (click)="generateExcel()" ><i class="fas fa-file-excel"></i>  Generar </a>
+              </div></div>
+  
+              <div nz-col class="gutter-row" align="right"  [nzSpan]="12"><div class="inner-box">            
+                <button class="btn btn-primary"> <i class="fas fa-search"></i>  Realizar busqueda </button>
+                </div></div>
+            </div>
+  
+          </form>   
+
+          
+      <br>
+        <!-- Table -->
+  
+  
+          <nz-table  
+          #fixedTable
+          #headerTable
+          [nzData]="data"
+          [nzScroll]="{ y: '240px' }"
+          nzShowPagination
+          [nzPageSizeOptions]="[10, 20, 30]"
+          nzShowSizeChanger
+          [nzPageSize]="pageSize"
+          [nzPageIndex]="current"
+          [nzFrontPagination]="false"
+          [nzTotal]="total"
+          [nzLoading]="isLoadingTable"
+          (nzPageSizeChange)="changePageSize($event)"
+          (nzPageIndexChange)="changeCurrentPage($event)"
+          >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Código de producto</th>
+              <th>Usuario</th>
+              <th>Fecha</th>
+              <th nzRight nzAlign="center" nzWidth="140px">Acciones</th>
+            </tr>
+          </thead>
+            
+          <tbody>
+            <tr *ngFor="let data of headerTable.data">
+              <td>{{ data.message }}</td>
+              <td>{{ data.codeProd }}</td>
+              <td>{{ data.userId }}</td>
+              <td>{{ data.createdAt | date: 'dd/MM/yyyy' }}</td>
+              <td nzRight nzAlign="center">
+                <nz-space>
+                  <button nz-button nzShape="circle" nzType="text">
+                    <i nz-icon nzTheme="twotone"  (click)="openViewDrawer(data)" [nzTwotoneColor]="'#08a000'" nzType="eye"></i>
+                  </button>
+<!--   
+                  <button nz-button nzShape="circle" nzType="text">
+                    <i nz-icon nzTheme="twotone"  (click)="openEditDrawer(data)" [nzTwotoneColor]="'#a31600'" nzType="edit"></i>
+                  </button> -->
+  
+                  <button nz-button nzShape="circle" nzType="text">
+                    <i nz-icon nzTheme="twotone"  (click)="showDeleteConfirm(data)" [nzTwotoneColor]="'#a31600'" nzType="delete"></i>
+                  </button>
+  
+                </nz-space>
+              </td>
+        
+            </tr>
+          </tbody>
+          </nz-table>
+        
+    
+
+</nz-spin>
+      
+    <!-- View drawer -->
+
+    <nz-drawer
+    [nzWidth]="340"
+    [nzClosable]="false"
+    [nzVisible]="visibleDrawer"
+    nzPlacement="right"
+    nzTitle="Mensaje"
+    (nzOnClose)="closeViewDrawer()"
+  >
+    <ng-container *nzDrawerContent>
+     <nz-spin [nzSpinning]="isLoadingDrawer">
+    
+      <nz-descriptions [nzColumn]="2" nzTitle="Enviado por: {{viewElement?.userId}}">
+        <nz-descriptions-item nzTitle="Código de producto" [nzSpan]="2">{{viewElement?.codeProd}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Fecha " [nzSpan]="2"> {{viewElement?.createdAt | date: 'dd/MM/yyyy'}} </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="ID " [nzSpan]="2"> {{viewElement?.id}} </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Calificación " [nzSpan]="2"> {{viewElement?.calf}} </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mensaje" [nzSpan]="2">
+          {{ viewElement?.message }}
+        </nz-descriptions-item>
+      </nz-descriptions>
+  
+     </nz-spin>
+    </ng-container>
+  </nz-drawer>
+
+  <!-- Edit drawer -->
+
+  <nz-drawer
+  [nzWidth]="540"
+  [nzClosable]="false"
+  [nzVisible]="visibleEditDrawer"
+  nzPlacement="right"
+  nzTitle="Cambiar estatus"
+  (nzOnClose)="closeEditDrawer()"
+  >
+  
+  <ng-container *nzDrawerContent>
+   <nz-spin [nzSpinning]="isLoadingDrawer">
+    <nz-descriptions [nzColumn]="2" nzTitle="Asunto: {{viewElement?.id}}">
+      <nz-descriptions-item nzTitle="Enviado por " [nzSpan]="2">{{viewElement?.id}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Fecha " [nzSpan]="2"> {{viewElement?.createdAt | date: 'dd/MM/yyyy'}} </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="ID " [nzSpan]="2"> {{viewElement?.id}} </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Mensaje" [nzSpan]="2">
+        {{ viewElement?.id }}
+      </nz-descriptions-item>
+    </nz-descriptions>
+   </nz-spin>
+  </ng-container>
+</nz-drawer>
+
+
+
+
+

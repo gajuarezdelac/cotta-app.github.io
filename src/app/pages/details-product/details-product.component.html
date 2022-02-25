@@ -1,0 +1,494 @@
+<nz-spin [nzSpinning]="isLoadingView">
+  <div *ngIf="element.id" class="pd-wrap">
+    <div class="container">
+      <div class="heading-section">
+        <h2>{{ element.name }}</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div
+            id="carouselExampleControls"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  class="d-block w-100"
+                  src="{{ element.images[0].routeFile }}"
+                  alt="First slide"
+                />
+              </div>
+
+              <div class="carousel-item" *ngFor="let item of images">
+                <img
+                  class="d-block w-100"
+                  src="{{ item.routeFile }}"
+                  alt="{{ item.id }}"
+                />
+              </div>
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true">
+              </span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="product-dtl">
+            <div class="product-info">
+              <div class="product-name"># {{ element.id.toUpperCase() }}</div>
+              <div class="reviews-counter">
+                <div class="rate">
+                  <nz-rate nzDisabled [ngModel]="calcullateRating()" nzAllowHalf></nz-rate>
+                </div>
+                <span *ngIf="lstReviews.length == 0" > Sin reviews  </span>
+                <span *ngIf="lstReviews.length != 0">{{lstReviews.length}} reviews </span>
+              </div>
+              <div class="product-price-discount">
+                <span>$ {{ calculatePrice(element.price,element.discount) }}</span>
+                <span class="line-through" *ngIf="element.discount > 0" >$ {{ element.price}} </span>
+              </div>
+            </div>
+            <p>{{ element.shortDescription }}</p>
+
+            <form
+            nz-form
+           [formGroup]="createProduct"
+           (ngSubmit)="validateForm()"
+           class="login-form"
+           [nzLayout]="'vertical'">
+
+
+           <div nz-row [nzGutter]="8"> 
+            <div nz-col nzSpan="12" [hidden]="element.typeClothing != '1'">
+              <nz-form-item [hidden]="element.typeClothing != '1'">
+                <nz-form-control  nzErrorTip="Campo requerido">
+                  <nz-form-label nzRequired> Talla </nz-form-label>
+                  <nz-select nz-input formControlName="size"  nzAllowClear (ngModelChange)="onChangeSize($event)"> 
+                    <nz-option *ngFor="let item of lstSizes" [nzLabel]="item.size" [nzValue]="item.size"></nz-option>
+
+                    <!-- <nz-option nzValue="3" nzLabel="Talla 3"></nz-option>
+                    <nz-option nzValue="3.5" nzLabel="Talla 3.5"></nz-option>
+                    <nz-option nzValue="4" nzLabel="Talla 4"></nz-option>
+                    <nz-option nzValue="4.5" nzLabel="Talla 4.5"></nz-option>
+                    <nz-option nzValue="5" nzLabel="Talla 5"></nz-option>
+                    <nz-option nzValue="5.5" nzLabel="Talla 5.5"></nz-option>
+                    <nz-option nzValue="6" nzLabel="Talla 6"></nz-option>
+                    <nz-option nzValue="6.5" nzLabel="Talla 6.5"></nz-option>
+                    <nz-option nzValue="7" nzLabel="Talla 7"></nz-option>
+                    <nz-option nzValue="7.5" nzLabel="Talla 7.5"></nz-option>
+                    <nz-option nzValue="8" nzLabel="Talla 8"></nz-option>
+                    <nz-option nzValue="8.5" nzLabel="Talla 8.5"></nz-option>
+                    <nz-option nzValue="9" nzLabel="Talla 9"></nz-option>
+                    <nz-option nzValue="9.5" nzLabel="Talla 9.5"></nz-option>
+                    <nz-option nzValue="10" nzLabel="Talla 10"></nz-option>
+                    <nz-option nzValue="10.5" nzLabel="Talla 10.5"></nz-option>
+                    <nz-option nzValue="11" nzLabel="Talla 11"></nz-option> -->
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+      
+            </div>
+      
+            <div nz-col nzSpan="12" [hidden]="element && element.typeClothing == '1'">
+              <nz-form-item [hidden]="element && element.typeClothing == '1'">
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <nz-form-label nzRequired> Talla </nz-form-label>
+                  <nz-select nz-input formControlName="size" (ngModelChange)="onChangeSize($event)">
+                    <nz-option *ngFor="let item of lstSizes" [nzLabel]="item.size" [nzValue]="item.size"></nz-option>
+                    <!-- <nz-option nzValue="S" nzLabel="Pequeño (S)"></nz-option>
+                    <nz-option nzValue="M" nzLabel="Mediano (M)"></nz-option>
+                    <nz-option nzValue="L" nzLabel="Grande (L)"></nz-option>
+                    <nz-option nzValue="XL" nzLabel="Extra largo (XL)"></nz-option> -->
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+      
+            
+            <div nz-col nzSpan="12">
+              <nz-form-item>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <nz-form-label nzRequired > Extra </nz-form-label>
+                  <nz-select nz-input formControlName="extra">
+                    <nz-option nzValue="S" nzLabel="Playera"></nz-option>
+                    <nz-option nzValue="M" nzLabel="Cordones"></nz-option>
+                    <nz-option nzValue="L" nzLabel="Short"></nz-option>
+                    <nz-option nzValue="XL" nzLabel="Sorpresa"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>        
+          </div>
+
+          <div class="product-count">
+            <label for="size" class="product-cantda"> <span class="required"></span> Digita la cantidad: </label>
+            <div class="display-flex">
+              <div class="qtyminus disable-select" (click)="lessOne()">-</div>
+              <input nz-input type="number" formControlName="cantd" [(ngModel)]="cantidad" class="qty" value="1" min="1"  max="{{elementBySize?.cantd}}" />
+              <div class="qtyplus disable-select" (click)="sumOne()" >+</div>
+            </div>
+
+            <p><label for="size" class="product-cantd"> <span class="required">** Cantidad maxima: </span> {{ elementBySize?.cantd == 0 ? placeholder : elementBySize?.cantd }} </label></p>
+
+            <button class="round-black-btn" nzType="primary" >
+              Añadir al carrito
+            </button>
+         </div>         
+           </form>
+           
+          </div>
+        </div>
+      </div>
+
+      <!--  -->
+      <div class="product-info-tabs">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              id="review-tab"
+              data-toggle="tab"
+              href="#review"
+              role="tab"
+              aria-controls="review"
+              aria-selected="false"
+              >Comentarios ({{lstReviews.length}})</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              id="description-tab"
+              data-toggle="tab"
+              href="#description"
+              role="tab"
+              aria-controls="description"
+              aria-selected="true"
+              >Descripción</a
+            >
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div
+            class="tab-pane fade"
+            id="description"
+            role="tabpanel"
+            aria-labelledby="description-tab"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum. Sed ut
+            perspiciatis unde omnis iste natus error sit voluptatem accusantium
+            doloremque laudantium, totam rem aperiam.
+          </div>
+
+
+          <div
+            class="tab-pane fade show active"
+            id="review"
+            role="tabpanel"
+            aria-labelledby="review-tab"
+          >
+            <div class="container">
+
+
+
+          <nz-skeleton [nzAvatar]="true"  [nzLoading]="isLoadingGetReviews" [nzParagraph]="{ rows: 4 }">
+            <div class="col-md-12">
+                  
+                <div class="offer-dedicated-body-left">
+                  <div class="tab-content" id="pills-tabContent">
+                    <div
+                      class="tab-pane fade active show"
+                      id="pills-reviews"
+                      role="tabpanel"
+                      aria-labelledby="pills-reviews-tab"
+                    >
+                      <div
+                        id="ratings-and-reviews"
+                        class="bg-white rounded shadow-sm p-4 mb-4 clearfix restaurant-detailed-star-rating"
+                      >
+                        <h5 class="mb-0">Calificación general del producto</h5>
+                      </div>
+                      <div
+                        class="bg-white rounded shadow-sm p-4 mb-4 clearfix graph-star-rating"
+                      >
+                        <div class="graph-star-rating-body">
+                          <div class="rating-list">
+                            <div class="rating-list-left text-black">
+                              5 Estrellas
+                            </div>
+                            <div class="rating-list-center">
+                              <div class="progress">
+                                <div
+                                  [ngStyle]="{'width': getReviewsByRate(5)}"
+                                  aria-valuemax="5"
+                                  aria-valuemin="0"
+                                  aria-valuenow="5"
+                                  role="progressbar"
+                                  class="progress-bar bg-primary"
+                                >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="rating-list-right text-black">{{getReviewsByRate(5)}}</div>
+                          </div>
+                          <div class="rating-list">
+                            <div class="rating-list-left text-black">
+                              4 Estrellas
+                            </div>
+                            <div class="rating-list-center">
+                              <div class="progress">
+                                <div
+                                  [ngStyle]="{'width': getReviewsByRate(4)}"
+                                  aria-valuemax="5"
+                                  aria-valuemin="0"
+                                  aria-valuenow="5"
+                                  role="progressbar"
+                                  class="progress-bar bg-primary"
+                                >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="rating-list-right text-black">{{getReviewsByRate(4)}}</div>
+                          </div>
+                          <div class="rating-list">
+                            <div class="rating-list-left text-black">
+                              3 Estrellas
+                            </div>
+                            <div class="rating-list-center">
+                              <div class="progress">
+                                <div
+                                  [ngStyle]="{'width': getReviewsByRate(3)}"
+                                  aria-valuemax="5"
+                                  aria-valuemin="0"
+                                  aria-valuenow="5"
+                                  role="progressbar"
+                                  class="progress-bar bg-primary"
+                                >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="rating-list-right text-black">{{getReviewsByRate(3)}}</div>
+                          </div>
+                          <div class="rating-list">
+                            <div class="rating-list-left text-black">
+                              2 Estrellas
+                            </div>
+                            <div class="rating-list-center">
+                              <div class="progress">
+                                <div
+                                [ngStyle]="{'width': getReviewsByRate(2)}"
+                                  aria-valuemax="5"
+                                  aria-valuemin="0"
+                                  aria-valuenow="5"
+                                  role="progressbar"
+                                  class="progress-bar bg-primary"
+                                >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="rating-list-right text-black">{{getReviewsByRate(2)}}</div>
+                          </div>
+
+                          <div class="rating-list">
+                            <div class="rating-list-left text-black">
+                              1 Estrella
+                            </div>
+                            <div class="rating-list-center">
+                              <div class="progress">
+                                <div
+                                [ngStyle]="{'width': getReviewsByRate(1)}"
+                                  aria-valuemax="5"
+                                  aria-valuemin="0"
+                                  aria-valuenow="5"
+                                  role="progressbar"
+                                  class="progress-bar bg-primary"
+                                >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="rating-list-right text-black">{{getReviewsByRate(1)}}</div>
+                          </div>
+                        </div>
+                        <div
+                          class="graph-star-rating-footer text-center mt-3 mb-3"
+                        >
+                          <button
+                            type="button"
+                            class="btn btn-outline-danger"
+                            (click)="showModalAddModal()"
+                          >
+                            Calificar producto
+                          </button>
+                        </div>
+                      </div>
+                      <div
+                        class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews"
+                      >
+                        <h5 class="mb-1">Comentarios</h5>
+                        <div class="reviews-members pt-4 pb-4" *ngFor="let item of lstReviews">
+                          <div class="media">
+                            <a href="#"
+                              ><img
+                                alt="Generic placeholder image"
+                                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                class="mr-3 rounded-pill"
+                            /></a>
+                            <div class="media-body">
+                              <div class="reviews-members-header">
+                                <h3 class="mb-1">
+                                    {{item.title}}
+                                </h3>
+                                <nz-rate [ngModel]="item.calf" nzAllowHalf></nz-rate>
+                                <p class="text-black"> {{item.userId}}</p>
+                              </div>
+                              <div class="reviews-members-body">
+                                <p>
+                                    {{item.message}}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <hr />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </nz-skeleton>
+
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <div style="text-align: center; font-size: 14px; padding-bottom: 20px">
+        Get free icon packs for your next project at
+        <a
+          href="http://iiicons.in/"
+          target="_blank"
+          style="color: #ff5e63; font-weight: bold"
+          >Cotta</a
+        >
+      </div>
+      
+    </div>
+  </div>
+</nz-spin>
+
+<!-- Modal Add -->
+
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleAdd"
+  nzTitle="Calificar producto"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="modalFooter"
+>
+  <ng-container *nzModalContent>
+    <div class="mod">
+      <form
+        #f="ngForm"
+        id="ngForm"
+        nz-form
+        [formGroup]="createForm"
+        (ngSubmit)="createSubmit()"
+        class="login-form"
+        [nzLayout]="'vertical'"
+      >
+        <nz-spin [nzSpinning]="isLoadingReview">
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired> Titulo </nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <input
+                    nz-input
+                    formControlName="title"
+                    placeholder="Escribe el titulo"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>
+                  ¿Cómo fue tu primera impresión?
+                </nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <nz-rate nz-input formControlName="calf"></nz-rate>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired>Descripción</nz-form-label>
+                <nz-form-control nzErrorTip="Campo requerido">
+                  <textarea
+                    nz-input
+                    formControlName="message"
+                    placeholder="¿Que te ha parecido el producto?"
+                    [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                  ></textarea>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+        </nz-spin>
+      </form>
+    </div>
+  </ng-container>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cerrar</button>
+    <button
+      nz-button
+      nzType="primary"
+      form="ngForm"
+      nz-button
+      [nzLoading]="isLoadingReview"
+    >
+      Comentar
+    </button>
+  </ng-template>
+</nz-modal>
+
+<app-splash *ngIf="element.id == ''"></app-splash>
